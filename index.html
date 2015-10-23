@@ -1,33 +1,36 @@
 <!DOCTYPE html>
-<html ng-app="gemStore">
+<html ng-app="dashboardApp">
   <head>
-    <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
     <link rel="stylesheet" type="text/css" href="app.css" />
     <script type="text/javascript" src="angular.min.js"></script>
     <script type="text/javascript" src="products.js"></script>
     <script type="text/javascript" src="app.js"></script>
+    <script type="text/javascript" src="notify-server.js"></script>
   </head>
 
-  <body ng-controller="StoreController as store">
-    <!--  Store Header  -->
+  <body ng-controller="DashboardController as dashboard">
     <header>
-      <h1 class="text-center">Flatlander Crafted Gems</h1>
-      <h2 class="text-center">– an Angular store –</h2>
+      <h1 class="text-center">Tioga Solutions - Dashboard</h1>
     </header>
 
-    <!--  Products Container  -->
-    <div class="list-group">
-      <!--  Product Container  -->
-      <div class="list-group-item" ng-repeat="product in store.products">
-        <h3>{{product.name}} <em class="pull-right">{{product.price | currency}}</em></h3>
+    <app-tabs></app-tabs>
 
-        <!-- Image Gallery  -->
-        <product-gallery></product-gallery>
+    <!--
+        <div class="list-group">
+          <div class="list-group-item" ng-repeat="product in dashboard.products">
+            <h3>{{product.name}} <em class="pull-right">{{product.price | currency}}</em></h3>
 
-        <!-- Product Tabs  -->
-        <product-tabs></product-tabs>
-      </div>
+            <product-gallery></product-gallery>
 
-    </div>
+            <product-tabs></product-tabs>
+          </div>
+
+        </div>
+    -->
+
   </body>
 </html>

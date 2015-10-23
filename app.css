@@ -16,3 +16,11 @@ body {
   margin-left: auto;
   margin-right: auto;
 }
+
+table.notifications td {
+  padding: 2px 5px;
+}
+
+td {
+  vertical-align: top;
+}

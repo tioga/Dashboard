@@ -11,11 +11,7 @@
     </li>
   </ul>
 
-  <div ng-show="tab.isSet(1)">
-    Notify Server
-    <div ng-controller="NotifyServerController as notifyServer">
-      Domain: {{notifyServer.domain}}
-    </div>
+  <div ng-show="tab.isSet(1)" ng-include="'notify-server.html'">
   </div>
 
   <div ng-show="tab.isSet(2)">Pushes</div>

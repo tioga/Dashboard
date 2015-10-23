@@ -1,0 +1,76 @@
+<div ng-controller="NotifyServerController as notifyServer">
+
+  <div ng-hide="notifyServer.authentication.signedIn">
+    <input type="text" value="{{notifyServer.authentication.username}}"><br>
+    <input type="text" value="{{notifyServer.authentication.password}}"><br>
+    <input type="button" value="Sign In" ng-click="notifyServer.signIn()">
+  </div>
+
+  <li ng-show="notifyServer.authentication.signedIn">
+    You are signed in to
+    <strong>{{notifyServer.domain.domainName}}</strong> as
+    <strong>{{notifyServer.authentication.username}}</strong>
+    (<a href ng-click="notifyServer.signOut()">sign out</a>).
+
+    <div style="margin-top: 1em;">
+
+      <nav>
+        <ul class="pagination">
+          <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+          <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+        </ul>
+      </nav>
+
+      Page: {{notifyServer.notifications.offset+1}}
+      <button ng-show="notifyServer.notifications.hasPrevious" href ng-click="notifyServer.previous()">previous</button>
+      <button ng-hide="notifyServer.notifications.totalExact" href ng-click="notifyServer.next()">next</button>
+      Limit: <select ng-model="notifyServer.limit" ng-change="notifyServer.loadNotifications()" style="width:4em; margin: 0">
+        <option selected>5</option>
+        <option>10</option>
+        <option>25</option>
+      </select>
+    </div>
+
+    <table class="notifications table-striped table-hover table-bordered">
+      <thead>
+        <tr>
+          <th>Created</th>
+          <th>Topic</th>
+          <th>Summary/Traits</th>
+          <th>Extra</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="notification in notifyServer.notifications.results">
+          <td style="white-space: nowrap">
+            {{ notification.createdAtLocal.substring(0,10)}}<br>
+            {{ notification.createdAtLocal.substring(11)}}<br>
+          </td>
+          <td style="white-space: nowrap">{{ notification.topic }}</td>
+          <td>
+            {{ notification.summary }}
+            {{Object.keys(notification.traitMap)}}
+            <ul>
+              <li ng-repeat="trait in notification.traits">
+                <span>{{trait.key}}</span>:
+                <span style="font-style: italic;">{{trait.value}}</span>
+              </li>
+            </ul>
+          </td>
+          <td>
+
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+
+</div>
+
+<!--
+
+<div ng-show="notifyServer.authentication.signedIn" style="text-align: center">
+  You are now signed in as <strong>{{authenticator.authentication.username}}</strong>
+  (<a href ng-click="authenticator.signOut()">sign out</a>)
+</div>-->
