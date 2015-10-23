@@ -1,0 +1,25 @@
+<section>
+  <ul class="nav nav-tabs">
+    <li ng-class="{ active:tab.isSet(1) }">
+      <a href ng-click="tab.setTab(1)">Notify</a>
+    </li>
+    <li ng-class="{ active:tab.isSet(2) }">
+      <a href ng-click="tab.setTab(2)">Push</a>
+    </li>
+    <li ng-class="{ active:tab.isSet(3) }">
+      <a href ng-click="tab.setTab(3)">Jobs</a>
+    </li>
+  </ul>
+
+  <div ng-show="tab.isSet(1)">
+    Notify Server
+    <div ng-controller="NotifyServerController as notifyServer">
+      Domain: {{notifyServer.domain}}
+    </div>
+  </div>
+
+  <div ng-show="tab.isSet(2)">Pushes</div>
+
+  <div ng-show="tab.isSet(3)">Jobs</div>
+
+</section>
