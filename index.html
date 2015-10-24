@@ -1,22 +1,20 @@
 <!DOCTYPE html>
 <html ng-app="dashboardApp">
   <head>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap-theme.min.css" />
     <link rel="stylesheet" type="text/css" href="app.css" />
+
     <script type="text/javascript" src="angular.min.js"></script>
     <script type="text/javascript" src="products.js"></script>
     <script type="text/javascript" src="app.js"></script>
+    <script type="text/javascript" src="assets/js/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="notify-server.js"></script>
   </head>
 
-  <body ng-controller="DashboardController as dashboard">
-    <header>
-      <h1 class="text-center">Tioga Solutions - Dashboard</h1>
-    </header>
-
+  <body ng-controller="DashboardController as dashboard" style="max-width: 800px; width: 100%">
+    <br/>
     <app-tabs></app-tabs>
 
     <!--
@@ -31,6 +29,17 @@
 
         </div>
     -->
+
+  <div id="blocking-ui">
+    <div id="blocking-ui-middle">
+      <div id="blocking-ui-inner">
+        <span class="img-rounded">
+          Processing request, please wait...
+          <img src="images/spinner-small.gif" style="width:10px; height:10px;"/>
+        </span>
+      </div>
+    </div>
+  </div>
 
   </body>
 </html>

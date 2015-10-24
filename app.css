@@ -24,3 +24,48 @@ table.notifications td {
 td {
   vertical-align: top;
 }
+
+#sign-in td {
+  padding: 2px;
+  vertical-align: baseline;
+}
+
+#notify-filter td {
+  padding: 2px;
+  vertical-align: baseline;
+}
+
+#blocking-ui {
+  display: none;
+  background: rgba(0, 0, 0, 0.4);
+    /*background-color: #ffffff;*/
+  /*opacity: 0.6;*/
+  /*filter: alpha(opacity=60); /!* For IE8 and earlier *!/*/
+  z-index: 9999;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+#blocking-ui-middle {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+#blocking-ui-inner {
+  text-align: center;
+  color: black;
+}
+
+#blocking-ui-inner span {
+  background: rgba(255, 255, 255, 1);
+
+  color: black;
+  padding: 10px;
+  font-size: 20px;
+  text-align: center;
+  border: 1px solid darkgray;
+}
+

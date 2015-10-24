@@ -2,19 +2,22 @@
 
   var app = angular.module('dashboardApp', ['store-directives']);
 
-  app.controller('DashboardController', ["$http", function($http){
-    var self = this;
+  app.controller('DashboardController', ['$scope', '$http', function($scope, $http){
+
+    var activeRequests = 0;
+
+    $scope.$on("httpRequest", function(event) {
+      activeRequests++;
+      angular.element(document.querySelector("#blocking-ui")).css("display", "table");
+    });
+
+    $scope.$on("httpResponse", function(event) {
+      activeRequests = Math.max(0, activeRequests-1);
+      if (activeRequests == 0) {
+        angular.element(document.querySelector("#blocking-ui")).css("display", "none");
+      }
+    });
   }]);
-
-
-  app.controller('ReviewController', function() {
-    this.review = {};
-
-    this.addReview = function(product) {
-      product.reviews.push(this.review);
-      this.review = {};
-    };
-  });
 
 
   app.directive("appTabs", function() {
@@ -34,6 +37,37 @@
       },
       controllerAs: "tab"
     };
+  });
+
+  app.config(function ($httpProvider, $provide) {
+    $provide.factory('httpInterceptor', function ($q, $rootScope) {
+      return {
+        'request': function (config) {
+          // intercept and change config: e.g. change the URL
+          // config.url += '?nocache=' + (new Date()).getTime();
+          // broadcasting 'httpRequest' event
+          $rootScope.$broadcast('httpRequest', config);
+          return config || $q.when(config);
+        },
+        'response': function (response) {
+          // we can intercept and change response here...
+          // broadcasting 'httpResponse' event
+          $rootScope.$broadcast('httpResponse', response);
+          return response || $q.when(response);
+        },
+        'requestError': function (rejection) {
+          // broadcasting 'httpRequestError' event
+          $rootScope.$broadcast('httpRequestError', rejection);
+          return $q.reject(rejection);
+        },
+        'responseError': function (rejection) {
+          // broadcasting 'httpResponseError' event
+          $rootScope.$broadcast('httpResponseError', rejection);
+          return $q.reject(rejection);
+        }
+      };
+    });
+    $httpProvider.interceptors.push('httpInterceptor');
   });
 
 })();
