@@ -23,7 +23,7 @@
     };
 
     self.authentication = {
-      username: "admin",
+      username: "adminx",
       password: "North2South!",
       signedIn: false
     };

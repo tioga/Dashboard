@@ -35,12 +35,9 @@ td {
   vertical-align: baseline;
 }
 
-#blocking-ui {
+.blocking-outer {
   display: none;
   background: rgba(0, 0, 0, 0.4);
-    /*background-color: #ffffff;*/
-  /*opacity: 0.6;*/
-  /*filter: alpha(opacity=60); /!* For IE8 and earlier *!/*/
   z-index: 9999;
   position: absolute;
   top: 0;
@@ -49,23 +46,21 @@ td {
   height: 100%;
 }
 
-#blocking-ui-middle {
+.blocking-middle {
   display: table-cell;
   vertical-align: middle;
 }
 
-#blocking-ui-inner {
+.blocking-inner {
   text-align: center;
   color: black;
 }
 
-#blocking-ui-inner span {
+.blocking-content {
   background: rgba(255, 255, 255, 1);
-
-  color: black;
+  /*color: black;*/
   padding: 10px;
-  font-size: 20px;
   text-align: center;
-  border: 1px solid darkgray;
+  cursor: pointer;
 }
 

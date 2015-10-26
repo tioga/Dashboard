@@ -5,7 +5,9 @@
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap-theme.min.css" />
     <link rel="stylesheet" type="text/css" href="app.css" />
 
-    <script type="text/javascript" src="angular.min.js"></script>
+    <!--<script type="text/javascript" src="angular.min.js"></script>-->
+    <script type="text/javascript" src="assets/js/angular.js"></script>
+
     <script type="text/javascript" src="products.js"></script>
     <script type="text/javascript" src="app.js"></script>
     <script type="text/javascript" src="assets/js/jquery-2.1.4.min.js"></script>
@@ -14,7 +16,7 @@
   </head>
 
   <body ng-controller="DashboardController as dashboard" style="max-width: 800px; width: 100%">
-    <br/>
+
     <app-tabs></app-tabs>
 
     <!--
@@ -30,16 +32,26 @@
         </div>
     -->
 
-  <div id="blocking-ui">
-    <div id="blocking-ui-middle">
-      <div id="blocking-ui-inner">
-        <span class="img-rounded">
+    <div id="please-wait" class="blocking-outer">
+      <div class="blocking-middle">
+        <div class="blocking-inner">
+        <span class="blocking-content img-rounded" style="border: 1px solid darkgray; font-size: 20px">
           Processing request, please wait...
           <img src="images/spinner-small.gif" style="width:10px; height:10px;"/>
         </span>
+        </div>
       </div>
     </div>
-  </div>
+
+    <div id="error-msg" class="blocking-outer" onclick="angular.element(document.querySelector('#error-msg')).css('display', 'none')">
+      <div class="blocking-middle">
+        <div class="blocking-inner">
+          <span class="blocking-content img-rounded" style="background-color: red; border: 2px solid white; font-weight: bold; color: white; font-size: 20px">
+            Something is really wrong
+          </span>
+        </div>
+      </div>
+    </div>
 
   </body>
 </html>

@@ -4,11 +4,11 @@
     <table>
       <tr>
         <td><label>Username:</label></td>
-        <td><input class="form-control" type="text" value="{{notifyServer.authentication.username}}"></td>
+        <td><input class="form-control" type="text" ng-model="notifyServer.authentication.username"></td>
       </tr>
       <tr>
         <td><label>Password:</label></td>
-        <td><input class="form-control" type="text" value="{{notifyServer.authentication.password}}"></td>
+        <td><input class="form-control" type="text" ng-model="notifyServer.authentication.password"></td>
         <td><input class="form-control" type="submit" value="Sign In"></td>
       </tr>
     </table>

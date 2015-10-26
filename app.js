@@ -5,18 +5,40 @@
   app.controller('DashboardController', ['$scope', '$http', function($scope, $http){
 
     var activeRequests = 0;
+    angular.element(document.querySelector("#blocking-ui")).css("display", "none");
 
     $scope.$on("httpRequest", function(event) {
       activeRequests++;
-      angular.element(document.querySelector("#blocking-ui")).css("display", "table");
+      angular.element(document.querySelector("#please-wait")).css("display", "table");
     });
 
-    $scope.$on("httpResponse", function(event) {
+    $scope.$on("httpResponse", requestCompleted);
+
+    $scope.$on("httpRequestError", function(event, args){
+      requestCompleted(event);
+      handleHttpError(event, args);
+    });
+
+    $scope.$on("httpResponseError", function(event, args){
+      requestCompleted(event);
+      handleHttpError(event, args);
+    });
+
+    function handleHttpError(event, args) {
+      var msg = args.status + " " + args.statusText + ": " + args.data;
+      if (args.status = 401) msg = "Invalid username or password"
+
+      angular.element(document.querySelector("#error-msg .blocking-content")).html(msg);
+      angular.element(document.querySelector("#error-msg")).css("display", "table");
+    }
+
+    function requestCompleted (event) {
       activeRequests = Math.max(0, activeRequests-1);
       if (activeRequests == 0) {
-        angular.element(document.querySelector("#blocking-ui")).css("display", "none");
+        angular.element(document.querySelector("#please-wait")).css("display", "none");
       }
-    });
+    }
+
   }]);
 
 
