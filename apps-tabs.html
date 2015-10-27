@@ -9,13 +9,17 @@
     <li ng-class="{ active:tab.isSet(3) }">
       <a href ng-click="tab.setTab(3)">Jobs</a>
     </li>
+    <li ng-class="{ active:tab.isSet(4) }">
+      <a href ng-click="tab.setTab(4)">Settings</a>
+    </li>
   </ul>
 
-  <div ng-show="tab.isSet(1)" ng-include="'notify-server.html'">
-  </div>
+  <div ng-show="tab.isSet(1)" ng-include="'notify-server.html'"></div>
 
   <div ng-show="tab.isSet(2)">Pushes</div>
 
   <div ng-show="tab.isSet(3)">Jobs</div>
+
+  <div ng-show="tab.isSet(4)" ng-include="'app-settings.html'"></div>
 
 </section>

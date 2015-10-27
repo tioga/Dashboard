@@ -1,4 +1,4 @@
-<div ng-controller="NotifyServerController as notifyServer">
+<div ng-controller="NotifyServerController as notifyServer" ng-init="init(dashboard.defaults)" style="padding: 10px">
 
   <form id="sign-in" class="form-inline" ng-submit="notifyServer.signIn()" ng-hide="notifyServer.authentication.signedIn">
     <table>
@@ -21,7 +21,7 @@
     (<a href ng-click="notifyServer.signOut()">sign out</a>).
 
     <form id="notify-filter" class="form-inline" style="margin-top: 1em" ng-submit="notifyServer.reloadNotifications()">
-      <table style="width: 100%">
+      <table style="width: 1em">
         <tr>
           <td><label for="topic-fld">Topic:</label></td>
           <td><select id="topic-fld" class="form-control" ng-model="notifyServer.topic" ng-options="x.name for x in notifyServer.summary.topics" ng-change="notifyServer.reloadNotifications()">
@@ -35,7 +35,7 @@
           <td><select id="trait-fld" class="form-control" ng-model="notifyServer.traitKey" ng-options="x.key for x in notifyServer.summary.traits" ng-change="notifyServer.reloadNotifications()">
             <option></option>
           </select></td>
-          <td style="width:100%"><input type="text" title="Trait Value" class="form-control" ng-model="notifyServer.traitValue" style="width:100%"></td>
+          <td style="width:100%"><input type="text" title="Trait Value" class="form-control" ng-model="notifyServer.traitValue" style="width:10em"></td>
           <td><input type="submit" title="Search" class="form-control" value="Search" style="width:100%"></td>
         </tr>
       </table>
@@ -77,11 +77,11 @@
       <!-- Notification Traits -->
       <div ng-show="notification.traits.length" style="margin-top: 1em">
         <div ng-hide="!notification.hideTraits">
-          {{ notification.traits.length }} traits:  <a href ng-click="notification.hideTraits=false" style="font-size: smaller">show</a>
+          {{ notification.traits.length }} trait{{notification.traits.length == 1 ? "" : "s"}}:  <a href ng-click="notification.hideTraits=false" style="font-size: smaller">show</a>
         </div>
 
         <div ng-hide="notification.hideTraits">
-          {{ notification.traits.length }} traits: <a href ng-click="notification.hideTraits=true" style="font-size: smaller">hide</a>
+          {{ notification.traits.length }} trait{{notification.traits.length == 1 ? "" : "s"}}: <a href ng-click="notification.hideTraits=true" style="font-size: smaller">hide</a>
           <ul>
             <li ng-repeat="trait in notification.traits">
               {{trait.key}}: <strong>{{trait.value}}</strong>
@@ -91,27 +91,22 @@
       </div>
 
 
-      <div class="modal fade" id="exception-info-dlg">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <!--<button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>-->
-              <h4 class="modal-title">{{notification.exceptionInfo.message}}</h4>
-            </div>
-            <div class="modal-body">
-              Type: <span style="font-weight:bold">{{notification.exceptionInfo.exceptionType}}</span>
+      <div ng-show="notification.attachmentInfoList.length" style="margin-top: 1em">
+        <div ng-hide="!notification.hideAttachments">
+          {{ notification.attachmentInfoList.length }} attachment{{notification.attachmentInfoList.length == 1 ? "" : "s"}}:  <a href ng-click="notification.hideAttachments=false" style="font-size: smaller">show</a>
+        </div>
 
-              <div style="margin-top: 1em">Stack Trace</div>
-              <div class="highlight img-rounded" style="background-color: #f7f7f9; border: 1px solid #e1e1e8; font-weight:bold; overflow: scroll; white-space: pre; height: 20em">{{ notification.exceptionInfo.stackTrace }}</div>
-
-            </div>
-            <!--<div class="modal-footer">-->
-              <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
-              <!--&lt;!&ndash;<button type="button" class="btn btn-primary">Save changes</button>&ndash;&gt;-->
-            <!--</div>-->
-          </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
-      </div><!-- /.modal -->
+        <div ng-hide="notification.hideAttachments">
+          {{ notification.attachmentInfoList.length }} attachment{{notification.attachmentInfoList.length == 1 ? "" : "s"}}: <a href ng-click="notification.hideAttachments=true" style="font-size: smaller">hide</a>
+          <ul>
+            <li ng-repeat="attachment in notification.attachmentInfoList">
+              <a href ng-click="notifyServer.showAttachment(notification, attachment)">
+                {{attachment.name}} ({{attachment.contentType}})
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
 
     </div>
   </div>

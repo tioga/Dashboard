@@ -7,15 +7,15 @@
 
     <!--<script type="text/javascript" src="angular.min.js"></script>-->
     <script type="text/javascript" src="assets/js/angular.js"></script>
-
-    <script type="text/javascript" src="products.js"></script>
-    <script type="text/javascript" src="app.js"></script>
     <script type="text/javascript" src="assets/js/jquery-2.1.4.min.js"></script>
     <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript" src="app.js"></script>
     <script type="text/javascript" src="notify-server.js"></script>
+    <script type="text/javascript" src="app-settings.js"></script>
   </head>
 
-  <body ng-controller="DashboardController as dashboard" style="max-width: 800px; width: 100%">
+  <body ng-controller="DashboardController as dashboard" style="width: 100%">
 
     <app-tabs></app-tabs>
 
@@ -49,6 +49,14 @@
           <span class="blocking-content img-rounded" style="background-color: red; border: 2px solid white; font-weight: bold; color: white; font-size: 20px">
             Something is really wrong
           </span>
+        </div>
+      </div>
+    </div>
+
+    <div id="image-viewer" class="blocking-outer" onclick="angular.element(document.querySelector('#image-viewer')).css('display', 'none')">
+      <div class="blocking-middle">
+        <div class="blocking-inner">
+          <img src="">
         </div>
       </div>
     </div>

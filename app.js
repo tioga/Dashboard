@@ -1,8 +1,22 @@
 (function() {
 
-  var app = angular.module('dashboardApp', ['store-directives']);
+  var app = angular.module('dashboardApp', []);
 
   app.controller('DashboardController', ['$scope', '$http', function($scope, $http){
+    var self = this;
+
+    self.defaults = {
+      server: {
+        root: "https://prod.stcg.net",
+        notifyRoot: "/notify-server/api/v1",
+        pushRoot: "/push-server/api/v1",
+        jobsRoot: "/jobs-server/api/v1"
+      },
+      authentication: {
+        username: "admin",
+        password: "North2South!"
+      }
+    };
 
     var activeRequests = 0;
     angular.element(document.querySelector("#blocking-ui")).css("display", "none");
@@ -26,7 +40,7 @@
 
     function handleHttpError(event, args) {
       var msg = args.status + " " + args.statusText + ": " + args.data;
-      if (args.status = 401) msg = "Invalid username or password"
+      if (args.status == 401) msg = "Invalid username or password";
 
       angular.element(document.querySelector("#error-msg .blocking-content")).html(msg);
       angular.element(document.querySelector("#error-msg")).css("display", "table");
@@ -47,7 +61,7 @@
       restrict: "E",
       templateUrl: "apps-tabs.html",
       controller: function() {
-        this.tab = 1;
+        this.tab = 4;
 
         this.isSet = function(checkTab) {
           return this.tab === checkTab;
