@@ -1,7 +1,7 @@
 (function() {
 
   var app = angular.module('dashboardApp');
-  app.controller('NotifyServerController', ['$scope', '$http', function($scope, $http){
+  app.controller('NotifyServer', ['$scope', '$http', function($scope, $http){
     var self = this;
 
     self.defaults = {
@@ -48,9 +48,8 @@
 
 
     self.signIn = function() {
-      console.log(self.authentication);
       $http.defaults.headers.common.Authorization = "Basic " + encode(self.authentication.username+":"+self.authentication.password);
-      var url = self.notifyUrl() + "/client/sign-in";
+      var url = self.getNotifyUrl() + "/client/sign-in";
       $http.get(url).then(self.signInSuccess);
     };
     self.signInSuccess = function(response) {
@@ -77,7 +76,7 @@
 
 
     self.loadSummary = function() {
-      var url = self.notifyUrl() + "/client/summary";
+      var url = self.getNotifyUrl() + "/client/summary";
       $http.get(url).then(self.loadSummarySuccess);
     };
     self.loadSummarySuccess = function(response) {
@@ -99,7 +98,7 @@
           traitValue: self.traitValue
         }
       };
-      var url = self.notifyUrl() + "/client/notifications";
+      var url = self.getNotifyUrl() + "/client/notifications";
       $http.get(url, config).then(self.loadNotificationsSuccess);
     };
     self.loadNotificationsSuccess = function(response) {
@@ -155,7 +154,7 @@
     }
 
     self.showAttachment = function(notification, attachment) {
-      var url = self.notifyUrl() + "/client/notifications/" + notification.notificationId + "/attachments/" + attachment.name;
+      var url = self.getNotifyUrl() + "/client/notifications/" + notification.notificationId + "/attachments/" + attachment.name;
 
       if ("image/jpeg" == attachment.contentType) {
         angular.element(document.querySelector("#image-viewer img")).attr("src", url);
@@ -167,13 +166,14 @@
       }
     };
 
-    self.notifyUrl = function() {
+    self.getNotifyUrl = function() {
       return self.defaults.server.root + self.defaults.server.notifyRoot;
     };
 
     $scope.init = function(defaults) {
       self.defaults = defaults;
-      self.authentication = defaults.authentication;
+      self.authentication.username = defaults.authentication.username;
+      self.authentication.password = defaults.authentication.password;
 
       if (self.authentication.username && self.authentication.password) {
         self.signIn(); // If we have credentials, use 'em.

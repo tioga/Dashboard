@@ -1,25 +1,25 @@
 <section style="margin-top: 1em">
   <ul class="nav nav-tabs">
-    <li ng-class="{ active:tab.isSet(1) }">
-      <a href ng-click="tab.setTab(1)">Notify</a>
+    <li ng-class="{ active:appsTab.isSet(1) }">
+      <a href ng-click="appsTab.setTab(1)">Notify</a>
     </li>
-    <li ng-class="{ active:tab.isSet(2) }">
-      <a href ng-click="tab.setTab(2)">Push</a>
+    <li ng-class="{ active:appsTab.isSet(2) }">
+      <a href ng-click="appsTab.setTab(2)">Push</a>
     </li>
-    <li ng-class="{ active:tab.isSet(3) }">
-      <a href ng-click="tab.setTab(3)">Jobs</a>
+    <li ng-class="{ active:appsTab.isSet(3) }">
+      <a href ng-click="appsTab.setTab(3)">Jobs</a>
     </li>
-    <li ng-class="{ active:tab.isSet(4) }">
-      <a href ng-click="tab.setTab(4)">Settings</a>
+    <li ng-class="{ active:appsTab.isSet(4) }">
+      <a href ng-click="appsTab.setTab(4)">Settings</a>
     </li>
   </ul>
 
-  <div ng-show="tab.isSet(1)" ng-include="'notify-server.html'"></div>
+  <div ng-show="appsTab.isSet(1)" ng-include="'apps/notify/notify-server.html'"></div>
 
-  <div ng-show="tab.isSet(2)">Pushes</div>
+  <div ng-show="appsTab.isSet(2)">Pushes</div>
 
-  <div ng-show="tab.isSet(3)">Jobs</div>
+  <div ng-show="appsTab.isSet(3)" ng-include="'apps/jobs/jobs-server.html'">Jobs</div>
 
-  <div ng-show="tab.isSet(4)" ng-include="'app-settings.html'"></div>
+  <div ng-show="appsTab.isSet(4)" ng-include="'apps/settings/app-settings.html'"></div>
 
 </section>

@@ -1,0 +1,47 @@
+<div ng-repeat="request in jobsServer.requests.results" class="highlight img-rounded"
+     style="background-color: #f7f7f9; border: 1px solid #e1e1e8; margin: 1em 0; padding: 0 5px"
+     xmlns:ts="http://www.w3.org/1999/xhtml">
+
+  <table class="job-req">
+    <tr>
+      <td style="font-weight: bold; color: blue">{{ request.jobDefinitionId }}</td>
+      <td style="font-size: xx-small; text-align: center">created</td>
+      <td style="font-size: xx-small; text-align: center">completed</td>
+    </tr>
+
+    <tbody ng-repeat="result in request.results">
+      <tr>
+        <td style="width: 100%; font-weight: bold">{{result.command}}</td>
+
+        <td style="white-space: nowrap">
+          <ts-date v="{{result.createdAt}}"></ts-date>
+          <ts-time v="{{result.createdAt}}"></ts-time>
+        </td>
+
+        <td style="white-space: nowrap">
+          <ts-date v="{{result.completedAt}}"></ts-date>
+          <ts-time v="{{result.completedAt}}"></ts-time>
+        </td>
+      </tr>
+
+      <tr ng-show="result.out">
+        <td colspan="3" style="width: 100%; font-style: italic; color: black; padding-left: 1em">
+          <span style="width: 1em; font-size: xx-small">out:</span>
+          {{result.out}}
+        </td>
+      </tr>
+
+      <tr ng-show="result.err">
+        <td colspan="3" style="width: 100%; font-style: italic; color: red; padding-left: 1em">
+          <span style="width: 1em; font-size: xx-small">err:</span>
+          {{result.err}}
+        </td>
+      </tr>
+
+    </tbody>
+
+    <tr><td style="font-size: xx-small" colspan="3">&nbsp;</td></tr>
+
+  </table>
+
+</div>

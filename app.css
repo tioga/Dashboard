@@ -17,6 +17,17 @@ body {
   margin-right: auto;
 }
 
+table.job-def td {
+  padding-right: 1em;
+}
+
+table.job-req {
+  width: 100%;
+}
+table.job-req td {
+  padding-right: 1em;
+}
+
 table.notifications td {
   padding: 2px 5px;
 }

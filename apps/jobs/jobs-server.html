@@ -1,0 +1,39 @@
+<div ng-controller="JobsServer as jobsServer" ng-init="init(dashboard.defaults)" style="padding: 10px">
+
+  <form id="sign-in" class="form-inline" ng-submit="jobsServer.signIn" ng-hide="jobsServer.authentication.signedIn">
+    <table>
+      <tr>
+        <td><label>Username:</label></td>
+        <td><input class="form-control" type="text" ng-model="jobsServer.authentication.username"></td>
+      </tr>
+      <tr>
+        <td><label>Password:</label></td>
+        <td><input class="form-control" type="text" ng-model="jobsServer.authentication.password"></td>
+        <td><input class="form-control" type="submit" value="Sign In"></td>
+      </tr>
+    </table>
+  </form>
+
+  <div ng-show="jobsServer.authentication.signedIn">
+    You are signed in to
+    <strong>{{jobsServer.domain.domainName}}</strong> as
+    <strong>{{jobsServer.authentication.username}}</strong>
+    (<a href ng-click="jobsServer.signOut()">sign out</a>).
+
+
+    <section style="margin-top: 1em">
+      <ul class="nav nav-pills">
+        <li ng-class="{ active:jobsServer.isTabSet(1) }">
+          <a href ng-click="jobsServer.setTab(1)">Definitions</a>
+        </li>
+        <li ng-class="{ active:jobsServer.isTabSet(2) }">
+          <a href ng-click="jobsServer.setTab(2)">Executions</a>
+        </li>
+      </ul>
+      <div ng-show="jobsServer.isTabSet(1)" ng-include="'apps/jobs/jobs-definitions.html'"></div>
+      <div ng-show="jobsServer.isTabSet(2)" ng-include="'apps/jobs/jobs-requests.html'"></div>
+    </section>
+
+  </div>
+
+</div>

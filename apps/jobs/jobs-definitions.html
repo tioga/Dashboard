@@ -1,0 +1,65 @@
+<div ng-repeat="job in jobsServer.jobs.results" class="highlight img-rounded" style="background-color: #f7f7f9; border: 1px solid #e1e1e8; margin: 1em 0; padding: 0 5px">
+  <div style="font-weight: bold; color: blue">{{ job.jobDefinitionId }}</div>
+
+  <table class="job-def">
+
+    <tbody ng-repeat="action in job.jobActions">
+      <tr>
+        <td colspan="3">
+          <span ng-show="action.actionType == 'OS_COMMAND'">OS Command</span>
+          <span ng-show="action.actionType == 'WAIT_FOR_HTTP'">HTTP Wait</span>
+          ({{action.timeout}}
+          <span ng-show="action.timeoutUnit == 'NANOSECONDS'">ns</span>
+          <span ng-show="action.timeoutUnit == 'MICROSECONDS'">us</span>
+          <span ng-show="action.timeoutUnit == 'MILLISECONDS'">ms</span>
+          <span ng-show="action.timeoutUnit == 'SECONDS'">sec</span>
+          <span ng-show="action.timeoutUnit == 'MINUTES'">min</span>
+          <span ng-show="action.timeoutUnit == 'HOURS'">hr</span>
+          <span ng-show="action.timeoutUnit == 'DAYS'">days</span>
+          timeout)
+        </td>
+      </tr>
+
+
+      <tr ng-show="action.actionType == 'OS_COMMAND'">
+        <td></td>
+        <td>Cmd:</td>
+        <td style="font-weight: bold">{{action.command}}</td>
+      </tr>
+      <tr ng-show="action.actionType == 'OS_COMMAND'">
+        <td></td>
+        <td>Dir:</td>
+        <td>{{action.workingDirectory}}</td>
+      </tr>
+      <tr ng-show="action.actionType == 'OS_COMMAND' && action.lock">
+        <td></td>
+        <td>Lock:</td>
+        <td>{{action.lock}}</td>
+      </tr>
+
+
+      <tr ng-show="action.actionType == 'WAIT_FOR_HTTP'">
+        <td></td>
+        <td>URL:</td>
+        <td>
+          <span style="font-weight: bold">{{action.httpRequest}}</span>
+          (<span ng-repeat="status in action.statuses">{{status}}&nbsp;</span>)
+        </td>
+      </tr>
+      <tr ng-show="action.actionType == 'WAIT_FOR_HTTP' && action.username">
+        <td></td>
+        <td>Username:</td>
+        <td style="font-weight: bold">{{action.username}}</td>
+      </tr>
+      <tr ng-show="action.actionType == 'WAIT_FOR_HTTP' && action.password">
+        <td></td>
+        <td>Password:</td>
+        <td style="font-weight: bold">{{action.password}}</td>
+      </tr>
+
+      <tr><td style="font-size: xx-small">&nbsp;</td></tr>
+
+    </tbody>
+  </table>
+
+</div>

@@ -2,6 +2,69 @@
 
   var app = angular.module('dashboardApp', []);
 
+  //app.directive('tsLabel', function() {
+  //  return {
+  //    restrict: "E"
+  //  }
+  //});
+  //
+  //app.directive('tsLabel', function () {
+  //  return {
+  //    restrict: 'E',
+  //    replace: true,
+  //    template: '<span>{{value}}</span>',
+  //    link: function(scope, elem, attrs) {
+  //      console.log("Attributes");
+  //      console.log(attrs);
+  //    }
+  //  }
+  //});
+
+  app.directive("tsDate", function() {
+    return {
+      scope: {
+        v: "@"
+      },
+      restrict: "E",
+      replace: true,
+      template: "<span>{{date}}</span>",
+      link: function (scope, element, attrs) {
+        var date = scope.v;
+        if (!date) return;
+
+        var year = date.substring(0, 4);
+        var month = date.substring(5, 7);
+        var day = date.substring(8, 10);
+        scope.date = month + "-" + day + "-" + year;
+      }
+    };
+  });
+
+  app.directive("tsTime", function() {
+    return {
+      scope: {
+        v: "@"
+      },
+      restrict: "E",
+      replace: true,
+      template: "<span>{{time}}</span>",
+      link: function (scope, element, attrs) {
+        var time = scope.v;
+        if (!time) return;
+
+        var hour = time.substring(11, 13);
+        var min = time.substring(14, 16);
+        var sec = time.substring(17, 19);
+        var part = (hour < 12) ? "am" : "pm";
+        if (hour == 0) hour = 12;
+        if (hour > 12) hour -= 12;
+
+        scope.time = hour +":"+ min+":"+sec+" "+part;
+      }
+    };
+  });
+
+
   app.controller('DashboardController', ['$scope', '$http', function($scope, $http){
     var self = this;
 
@@ -10,7 +73,7 @@
         root: "https://prod.stcg.net",
         notifyRoot: "/notify-server/api/v1",
         pushRoot: "/push-server/api/v1",
-        jobsRoot: "/jobs-server/api/v1"
+        jobsRoot: "/jobs-agent/api/v1"
       },
       authentication: {
         username: "admin",
@@ -61,7 +124,7 @@
       restrict: "E",
       templateUrl: "apps-tabs.html",
       controller: function() {
-        this.tab = 4;
+        this.tab = 3;
 
         this.isSet = function(checkTab) {
           return this.tab === checkTab;
@@ -71,9 +134,10 @@
           this.tab = activeTab;
         };
       },
-      controllerAs: "tab"
+      controllerAs: "appsTab"
     };
   });
+
 
   app.config(function ($httpProvider, $provide) {
     $provide.factory('httpInterceptor', function ($q, $rootScope) {
