@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/Dashboard.iml" filepath="$PROJECT_DIR$/.idea/Dashboard.iml" />
+      <module fileurl="file://$PROJECT_DIR$/tioga-dashboard-app-angular/tioga-dashboard-app-angular.iml" filepath="$PROJECT_DIR$/tioga-dashboard-app-angular/tioga-dashboard-app-angular.iml" />
+      <module fileurl="file://$PROJECT_DIR$/tioga-dashboard-app-aurelia/tioga-dashboard-app-aurelia.iml" filepath="$PROJECT_DIR$/tioga-dashboard-app-aurelia/tioga-dashboard-app-aurelia.iml" />
     </modules>
   </component>
 </project>

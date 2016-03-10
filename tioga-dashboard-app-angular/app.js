@@ -64,20 +64,18 @@
     };
   });
 
-
   app.controller('DashboardController', ['$scope', '$http', function($scope, $http){
     var self = this;
 
     self.defaults = {
       server: {
-        root: "https://prod.stcg.net",
-        notifyRoot: "/notify-server/api/v1",
-        pushRoot: "/push-server/api/v1",
-        jobsRoot: "/jobs-agent/api/v1"
+        notifyRoot: "http://engine.notify.tioga.solutions/api/v1",
+        pushRoot: "http://engine.push.tioga.solutions/push-server/api/v1",
+        jobsRoot: "http://engine.jobs.tioga.solutions/jobs-agent/api/v1"
       },
       authentication: {
-        username: "admin",
-        password: "North2South!"
+        username: null,
+        password: null
       }
     };
 

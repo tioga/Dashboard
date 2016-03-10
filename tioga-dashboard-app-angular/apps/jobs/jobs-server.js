@@ -59,9 +59,10 @@
       self.authentication.signedIn = false;
     };
     self.signIn = function() {
-      $http.defaults.headers.common.Authorization = "Basic " + encode(self.authentication.username+":"+self.authentication.password);
-      var url = self.getJobsUrl() + "/client/sign-in";
-      $http.get(url).then(self.signInSuccess);
+      console.log("Job Server login is disabled")
+      //$http.defaults.headers.common.Authorization = "Basic " + encode(self.authentication.username+":"+self.authentication.password);
+      //var url = self.getJobsUrl() + "/client/sign-in";
+      //$http.get(url).then(self.signInSuccess);
     };
     self.signInSuccess = function(response) {
       self.authentication.signedIn = true;
@@ -71,8 +72,7 @@
     };
 
     self.getJobsUrl = function() {
-      return "http://localhost:39007" + self.defaults.server.jobsRoot;
-      // return self.defaults.server.root + self.defaults.server.jobsRoot;
+      return self.defaults.server.jobsRoot;
     };
 
     $scope.init = function(defaults) {

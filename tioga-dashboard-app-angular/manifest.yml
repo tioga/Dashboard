@@ -1,7 +1,9 @@
 ---
 applications:
 - name: tioga-dashboard
-  memory: 64M
+  memory: 32M
   timeout: 60
   buildpack: staticfile_buildpack
-  domain: dashboard.tioga.solutions  
+
+  host: www
+  domain: tioga.solutions

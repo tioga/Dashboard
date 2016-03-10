@@ -48,6 +48,7 @@
 
 
     self.signIn = function() {
+      console.log("Signing in as " + self.authentication.username+":"+self.authentication.password);
       $http.defaults.headers.common.Authorization = "Basic " + encode(self.authentication.username+":"+self.authentication.password);
       var url = self.getNotifyUrl() + "/client/sign-in";
       $http.get(url).then(self.signInSuccess);
@@ -167,7 +168,7 @@
     };
 
     self.getNotifyUrl = function() {
-      return self.defaults.server.root + self.defaults.server.notifyRoot;
+      return self.defaults.server.notifyRoot;
     };
 
     $scope.init = function(defaults) {
